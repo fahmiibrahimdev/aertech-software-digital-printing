@@ -1,6 +1,6 @@
 <div>
     <div class="section-header tw-rounded-lg tw-text-black lg:tw-hidden">
-        <h4 class="tw-text-lg">Order Kerja</h4>
+        <h4 class="tw-text-lg">Order Kerja {{ $id_order_kerja }}</h4>
     </div>
 
     <div class="section-body">

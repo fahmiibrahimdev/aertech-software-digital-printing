@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('order_kerjas', function (Blueprint $table) {
-            $table->id();
+            $table->text('id');
             $table->text('id_customer');
             $table->text('nomor_transaksi');
             $table->text('tanggal');

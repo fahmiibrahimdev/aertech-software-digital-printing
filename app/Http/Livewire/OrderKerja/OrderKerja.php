@@ -32,15 +32,7 @@ class OrderKerja extends Component
 
     public function mount()
     {
-        $lastId = ModelsOrderKerja::latest()->first();
-        $id_order_kerja = $lastId->id ?? 0;
-        if( $id_order_kerja == 0 )
-        {
-            $id_order_kerja = $lastId->id ?? 0 + 1;
-        } else {
-            $id_order_kerja = $lastId->id + 1;
-        }
-        $this->id_order_kerja = $id_order_kerja;
+        $this->id_order_kerja = rand();
 
         $lastIdDetail = DetailOrderKerja::latest()->first();
         $id_detail_order_kerja = $lastIdDetail->id ?? 0;
@@ -67,18 +59,13 @@ class OrderKerja extends Component
         $this->keterangan = '-';
     }
 
+	private function resetIdOrderKerja()
+	{
+		$this->id_order_kerja = rand();
+	}
+
     private function resetInputFields()
     {
-        $lastId = ModelsOrderKerja::latest()->first();
-        $id_order_kerja = $lastId->id ?? 0;
-        if( $id_order_kerja == 0 )
-        {
-            $id_order_kerja = $lastId->id ?? 0 + 1;
-        } else {
-            $id_order_kerja = $lastId->id + 1;
-        }
-        $this->id_order_kerja = $id_order_kerja;
-
         $lastIdDetail = DetailOrderKerja::latest()->first();
         $id_detail_order_kerja = $lastIdDetail->id ?? 0;
         if( $id_detail_order_kerja == 0 )
@@ -107,14 +94,6 @@ class OrderKerja extends Component
 
     public function render()
     {
-        $lastId = ModelsOrderKerja::latest()->first();
-        $id_order_kerja = $lastId->id ?? 0;
-        if( $id_order_kerja == 0 )
-        {
-            $id_order_kerja = $lastId->id ?? 0 + 1;
-        } else {
-            $id_order_kerja = $lastId->id + 1;
-        }
 		$this->idLevelCustomer = Customer::where('id', $this->id_customer)->first()->id_level_customer;
 
         $searchTerm = '%'.$this->searchTerm.'%';
@@ -125,7 +104,7 @@ class OrderKerja extends Component
                     ->join('bahans', 'bahans.id', 'detail_bahans.id_bahan')
                     ->join('nama_pekerjaans', 'nama_pekerjaans.id', 'detail_bahans.id_pekerjaan')
                     ->join('mesins', 'mesins.id', 'nama_pekerjaans.id_mesin')
-                    ->where('id_order_kerja', $id_order_kerja)
+                    ->where('id_order_kerja', $this->id_order_kerja)
                     ->where(function($query) use ($searchTerm) {
                         $query->where('bahans.nama_barang', 'LIKE', $searchTerm);
                         $query->orWhere('mesins.nama_printer', 'LIKE', $searchTerm);
@@ -157,7 +136,7 @@ class OrderKerja extends Component
 							->where('nama_pekerjaans.id_mesin', $this->id_mesin_printer)
                             ->get();
 
-        $sumTotal = DetailOrderKerja::select(DB::raw("SUM(total) as total"))->where('id_order_kerja', $id_order_kerja)->first();
+        $sumTotal = DetailOrderKerja::select(DB::raw("SUM(total) as total"))->where('id_order_kerja', $this->id_order_kerja)->first();
 
         return view('livewire.order-kerja.order-kerja', compact('data', 'dataCustomer', 'dataBahan', 'sumTotal', 'dataPrinter', 'dataLevelCustomer'))
         ->extends('layouts.apps', ['title' => 'Buat Orderan Baru']);
@@ -577,6 +556,7 @@ class OrderKerja extends Component
 
         $kode = generate_string($permitted_chars, 10);
         ModelsOrderKerja::create([
+            'id'   				=> $this->id_order_kerja,
             'id_customer'   	=> $this->id_customer,
             'nomor_transaksi'	=> $kode,
             'tanggal'       	=> $this->tanggal,
@@ -585,6 +565,7 @@ class OrderKerja extends Component
             'total'         	=> $total,
         ]);
         $this->resetInputFields();
+        $this->resetIdOrderKerja();
         $this->dispatchBrowserEvent('swal:modal', [
             'type' => 'success',  
             'message' => 'Successfully!', 
