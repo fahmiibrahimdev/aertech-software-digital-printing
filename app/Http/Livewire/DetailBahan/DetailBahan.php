@@ -32,7 +32,7 @@ class DetailBahan extends Component
 		$this->id_level_customer = LevelCustomer::min('id');
         $this->ukuran = '';
         $this->min_qty = 1;
-        $this->max_qty= 1;
+        $this->max_qty= 999;
         $this->harga_jual = 0;
         $this->min_order = 1;
     }
@@ -41,7 +41,7 @@ class DetailBahan extends Component
     {
         $this->ukuran = '';
         $this->min_qty = 1;
-        $this->max_qty= 1;
+        $this->max_qty= 999;
         $this->harga_jual = 0;
         $this->min_order = 1;
     }

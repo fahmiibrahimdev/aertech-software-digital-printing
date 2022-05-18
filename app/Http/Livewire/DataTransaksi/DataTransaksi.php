@@ -31,7 +31,7 @@ class DataTransaksi extends Component
                     ->orWhere('order_kerjas.deadline_time', 'LIKE', $searchTerm)
                     ->orWhere('order_kerjas.total', 'LIKE', $searchTerm)
                     ->orWhere('customers.nama_customer', 'LIKE', $searchTerm)
-                    ->orderBy('id', 'DESC')
+                    ->orderBy('created_at', 'DESC')
                     ->paginate($lengthData);
 
         return view('livewire.data-transaksi.data-transaksi', compact('data'))

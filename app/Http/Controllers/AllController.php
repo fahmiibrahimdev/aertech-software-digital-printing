@@ -72,8 +72,9 @@ class AllController extends Controller
 						->join('pembayarans', 'pembayarans.id_order_kerja', 'order_kerjas.id')
 						->where('order_kerjas.id', $id)
 						->first();
+				// 		dd($data);
 
-		$dataTransaksi = $dataDetailOrderKerja = DetailOrderKerja::select('detail_order_kerjas.nama_file', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.harga', 'detail_order_kerjas.total', 'bahans.nama_barang', 'nama_pekerjaans.nama_pekerjaan', 'mesins.nama_printer', 'detail_order_kerjas.keterangan')
+		$dataTransaksi = $dataDetailOrderKerja = DetailOrderKerja::select('detail_order_kerjas.nama_file', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.harga', 'detail_order_kerjas.total', 'bahans.nama_barang', 'nama_pekerjaans.nama_pekerjaan', 'mesins.nama_printer', 'detail_order_kerjas.keterangan', 'detail_order_kerjas.laminasi_meter', 'detail_order_kerjas.laminasi_a3', 'detail_order_kerjas.cutting_meter', 'detail_order_kerjas.cutting_a3')
 				->join('detail_bahans', 'detail_bahans.id', 'detail_order_kerjas.id_detail_bahan')
 				->join('bahans', 'bahans.id', 'detail_bahans.id_bahan')
 				->join('nama_pekerjaans', 'nama_pekerjaans.id', 'detail_bahans.id_pekerjaan')

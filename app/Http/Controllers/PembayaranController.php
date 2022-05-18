@@ -50,7 +50,7 @@ class PembayaranController extends Controller
             ]);
             if( Auth::user()->hasRole('admin') )
 			{
-				return redirect()->route('admin/data-transaksi');
+				return redirect()->route('cetak-invoice', $request->id_order_kerja);
 			} else {
 				return redirect()->route('data-transaksi');
 			}
@@ -71,7 +71,7 @@ class PembayaranController extends Controller
             ]);
 			if( Auth::user()->hasRole('admin') )
 			{
-				return redirect()->route('admin/data-transaksi');
+				return redirect()->route('cetak-invoice', $request->id_order_kerja);
 			} else {
 				return redirect()->route('data-transaksi');
 			}

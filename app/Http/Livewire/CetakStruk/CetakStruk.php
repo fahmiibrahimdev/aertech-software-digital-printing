@@ -29,7 +29,7 @@ class CetakStruk extends Component
                     ->orWhere('order_kerjas.deadline_time', 'LIKE', $searchTerm)
                     ->orWhere('order_kerjas.total', 'LIKE', $searchTerm)
                     ->orWhere('customers.nama_customer', 'LIKE', $searchTerm)
-                    ->orderBy('id', 'DESC')
+                    ->orderBy('order_kerjas.tanggal', 'DESC')
                     ->paginate($lengthData);
 
         return view('livewire.cetak-struk.cetak-struk', compact('data'))

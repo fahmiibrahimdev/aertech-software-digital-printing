@@ -15,7 +15,7 @@
                                         <label for="total_hargaa">TOTAL HARGA TRANSAKSI</label>
                                         <input type="text" name="total_hargaa" id="total_hargaa" class="form-control"
                                             style="padding: 67px; font-size: 30px; font-weight: bold; text-align: center;"
-                                            readonly value="Rp{{ number_format($sumTotal->total) }}">
+                                            readonly value="Rp{{ number_format((int)$sumTotal->total, 0, ',', '.') }}">
                                     </div>
                                 </div>
                                 <div class="col-lg-8">
@@ -151,7 +151,7 @@
     {{-- Tambah Data --}}
     <div class="modal fade" wire:ignore.self id="tambahDataModal" tabindex="-1" aria-labelledby="tambahDataModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="tambahDataModalLabel">Tambah Data</h5>
@@ -182,7 +182,7 @@
                                 <div class="form-group">
 									<label for="id_detail_bahan">Nama Pekerjaan</label>
 									<select wire:model="id_detail_bahan" id="id_detail_bahan" class="form-control">
-									<option selected disabled>-- Select Option --</option>
+									<option value="0">-- Select Option --</option>
 										@foreach ($dataBahan as $bahan)
 											<option value="{{ $bahan->id }}">{{ $bahan->nama_pekerjaan }} - {{ $bahan->nama_barang }} | {{ $bahan->ukuran }} | Rp{{ number_format($bahan->harga_jual) }}</option>
 										@endforeach
@@ -210,41 +210,33 @@
                         </div>
 						<div class="row">
 							<div class="col-lg-6">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="laminasi_meter">
-									<label class="form-check-label" for="laminasi_meter">Laminasi Meter</label>
-								</div>
 								<div class="form-group">
-									<input type="number" wire:model='laminasi_meter' class="form-control" id="laminasi_meteran">
+									<label for="laminasi_meter">Laminasi Meter</label>
+									<input type="number" wire:model='laminasi_meter' class="form-control" id="laminasi_meter">
+									<small class="form-text text-muted">Rp {{ number_format((int)$laminasi_meter, 0, ',', '.') }},00</small>
 								</div>
 							</div>
 							<div class="col-lg-6">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="cutting_meter">
-									<label class="form-check-label" for="cutting_meter">Cutting Meter</label>
-								</div>
 								<div class="form-group">
-									<input type="number" wire:model='cutting_meter' class="form-control" id="cutting_meteran">
+									<label for="cutting_meter">Cutting Meter</label>
+									<input type="number" wire:model='cutting_meter' class="form-control" id="cutting_meter">
+									<small class="form-text text-muted">Rp {{ number_format((int)$cutting_meter, 0, ',', '.') }},00</small>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-6">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="laminasi_a3">
-									<label class="form-check-label" for="laminasi_a3">Laminasi A3</label>
-								</div>
 								<div class="form-group">
-									<input type="number" wire:model='laminasi_a3' class="form-control" id="laminasi_a3an">
+									<label for="laminasi_a3">Laminasi A3</label>
+									<input type="number" wire:model='laminasi_a3' class="form-control" id="laminasi_a3">
+									<small class="form-text text-muted">Rp {{ number_format((int)$laminasi_a3, 0, ',', '.') }},00</small>
 								</div>
 							</div>
 							<div class="col-lg-6">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="cutting_a3">
-									<label class="form-check-label" for="cutting_a3">Cutting A3</label>
-								</div>
 								<div class="form-group">
-									<input type="number" wire:model='cutting_a3' class="form-control" id="cutting_a3an">
+									<label for="cutting_a3">Cutting A3</label>
+									<input type="number" wire:model='cutting_a3' class="form-control" id="cutting_a3">
+									<small class="form-text text-muted">Rp {{ number_format((int)$cutting_a3, 0, ',', '.') }},00</small>
 								</div>
 							</div>
 						</div>
@@ -267,7 +259,7 @@
     {{-- Update Data --}}
     <div class="modal fade" wire:ignore.self id="ubahDataModal" tabindex="-1" aria-labelledby="ubahDataModalLabel"
         aria-hidden="true" data-keyboard="false" data-backdrop="static">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="ubahDataModalLabel">Edit Data</h5>
@@ -311,41 +303,33 @@
                         </div>
 						<div class="row">
 							<div class="col-lg-6">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="laminasi_meter">
-									<label class="form-check-label" for="laminasi_meter">Laminasi Meter</label>
-								</div>
 								<div class="form-group">
-									<input type="number" wire:model='laminasi_meter' class="form-control" id="laminasi_meteran">
+									<label for="laminasi_meter">Laminasi Meter</label>
+									<input type="number" wire:model='laminasi_meter' class="form-control" id="laminasi_meter">
+									<small class="form-text text-muted">Rp {{ number_format((int)$laminasi_meter, 0, ',', '.') }},00</small>
 								</div>
 							</div>
 							<div class="col-lg-6">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="cutting_meter">
-									<label class="form-check-label" for="cutting_meter">Cutting Meter</label>
-								</div>
 								<div class="form-group">
-									<input type="number" wire:model='cutting_meter' class="form-control" id="cutting_meteran">
+									<label for="cutting_meter">Cutting Meter</label>
+									<input type="number" wire:model='cutting_meter' class="form-control" id="cutting_meter">
+									<small class="form-text text-muted">Rp {{ number_format((int)$cutting_meter, 0, ',', '.') }},00</small>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-6">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="laminasi_a3">
-									<label class="form-check-label" for="laminasi_a3">Laminasi A3</label>
-								</div>
 								<div class="form-group">
-									<input type="number" wire:model='laminasi_a3' class="form-control" id="laminasi_a3an">
+									<label for="laminasi_a3">Laminasi A3</label>
+									<input type="number" wire:model='laminasi_a3' class="form-control" id="laminasi_a3">
+									<small class="form-text text-muted">Rp {{ number_format((int)$laminasi_a3, 0, ',', '.') }},00</small>
 								</div>
 							</div>
 							<div class="col-lg-6">
-								<div class="form-check">
-									<input class="form-check-input" type="checkbox" id="cutting_a3">
-									<label class="form-check-label" for="cutting_a3">Cutting A3</label>
-								</div>
 								<div class="form-group">
-									<input type="number" wire:model='cutting_a3' class="form-control" id="cutting_a3an">
+									<label for="cutting_a3">Cutting A3</label>
+									<input type="number" wire:model='cutting_a3' class="form-control" id="cutting_a3">
+									<small class="form-text text-muted">Rp {{ number_format((int)$cutting_a3, 0, ',', '.') }},00</small>
 								</div>
 							</div>
 						</div>

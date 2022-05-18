@@ -44,7 +44,7 @@
 							<span class="text-dark">
 								@if($row->tanggal_taking)
 									<b>[{{ Carbon\Carbon::parse($row->tanggal_finishing)->format('d F H:i') }}]</b> 
-									Pesanan telah diterima yang bersangkutan <br>
+									<span class="text-success">Pesanan telah diterima yang bersangkutan</span> <br>
 								@else
 								@endif
 								@if($row->tanggal_finishing)

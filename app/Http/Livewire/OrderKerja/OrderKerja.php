@@ -62,6 +62,7 @@ class OrderKerja extends Component
 	private function resetIdOrderKerja()
 	{
 		$this->id_order_kerja = rand();
+		$this->id_customer = Customer::min('id');
 	}
 
     private function resetInputFields()
@@ -81,7 +82,6 @@ class OrderKerja extends Component
         $this->laminasi_a3 = 0;
         $this->cutting_a3 = 0;
         $this->id_detail_bahan = detailBahan::min('id');
-        $this->id_customer = Customer::min('id');
         $this->qty = 1;
         $this->keterangan = '-';
     }
@@ -119,14 +119,20 @@ class OrderKerja extends Component
                     ->orderBy('detail_order_kerjas.id', 'ASC')
                     ->paginate($lengthData);
 
-        $dataCustomer = Customer::select('customers.*', 'level_customers.nama_level')->join('level_customers', 'leveL_customers.id', 'customers.id_level_customer')->orderBy('customers.nama_customer', 'ASC')->get();
+        $dataCustomer = Customer::select('customers.*', 'level_customers.nama_level')->join('level_customers', 'level_customers.id', 'customers.id_level_customer')->orderBy('customers.nama_customer', 'ASC')->get();
 		$dataLevelCustomer = LevelCustomer::get();
 
         $dataPrinter = Mesin::select('id', 'kode_printer', 'nama_printer')->get();
-		$this->nama_barang = detailBahan::join('bahans', 'bahans.id', 'detail_bahans.id_bahan')
+        if( $this->id_detail_bahan == 0 )
+        {
+            $this->nama_barang = '';
+        }else {
+            $this->nama_barang = detailBahan::join('bahans', 'bahans.id', 'detail_bahans.id_bahan')
 								->where('detail_bahans.id', $this->id_detail_bahan)
 								->first()
 								->nama_barang;
+        }
+		
 
         $dataBahan = detailBahan::select('detail_bahans.id', 'bahans.nama_barang', 'nama_pekerjaans.nama_pekerjaan', 'mesins.nama_printer', 'detail_bahans.ukuran', 'detail_bahans.harga_jual')
                             ->join('bahans', 'bahans.id', 'detail_bahans.id_bahan')

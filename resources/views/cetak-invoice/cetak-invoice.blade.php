@@ -18,7 +18,6 @@
         />
     </head>
     <body style="font-family: Inter, sans-serif">
-        <div class="container mt-3">
 			<div class="text-center">
 				<h3><b>SINTESA DIGITAL PRINTING</b></h3>
 				<p>Subang, Jawa Barat.</p>
@@ -53,14 +52,13 @@
                 </div>
             </div>
             <div id="data-transaksi" class="mt-3">
-                <table width="100%" style="font-size: 12px">
+                <table style="font-size: 12px" width="100%">
                     <thead>
                         <tr
                             style="
                                 border-top: 2px dashed black;
                                 border-bottom: 2px dashed black;
-                            "
-                        >
+                            ">
                             <th style="padding-top: 10px; padding-bottom: 10px">
                                 NAMA FILE
                             </th>
@@ -77,13 +75,20 @@
                         <tr class="align-middle">
                             <td style="padding-top: 5px;">
                                 <b>{{ $row->nama_file }}</b> <br />
-                                {{ $row->qty }}X{{ $row->keterangan }}
+                                {{ $row->keterangan }}_{{ $row->nama_barang }} <br />
+                                @if( $row->laminasi_meter || $row->laminasi_a3 )
+                                    LAMINASI <br />
+                                @else
+                                
+                                @endif
+                                @if( $row->cutting_meter || $row->cutting_a3 )
+                                    CUTTING <br />
+                                @else
+                                
+                                @endif
                             </td>
                             <td class="text-end"><b>{{ $row->qty }}.00</b></td>
-                            <td>
-                                <span class="float-end"
-                                    ><b>{{ number_format($row->total) }}</b></span
-                                >
+                            <td class="text-end"><b>{{ str_replace(',', '.', number_format($row->total)) }}</b>
                             </td>
                         </tr>
                         @endforeach
@@ -94,8 +99,7 @@
                             <th style="padding-top: 10px">Total</th>
                             <th style="padding-top: 10px">
                                 <span class="float-end"
-                                    >{{ number_format($data->total) }}</span
-                                >
+                                    >{{ str_replace(',', '.', number_format($data->total)) }}</span>
                             </th>
                         </tr>
                         <tr class="text-end">
@@ -103,7 +107,7 @@
                             <th>Pembulatan</th>
                             <th>
                                 <span class="float-end"
-                                    >{{ number_format($data->pembulatan) }}</span
+                                    >{{ str_replace(',', '.', number_format($data->pembulatan)) }}</span
                                 >
                             </th>
                         </tr>
@@ -112,7 +116,7 @@
                             <th>Discount</th>
                             <th>
                                 <span class="float-end"
-                                    >{{ number_format($data->discount_invoice) }}</span
+                                    >{{ str_replace(',', '.', number_format($data->discount_invoice)) }}</span
                                 >
                             </th>
                         </tr>
@@ -121,7 +125,7 @@
                             <th>Total Net</th>
                             <th>
                                 <span class="float-end"
-                                    >{{ number_format($data->total_net) }}</span
+                                    >{{ str_replace(',', '.', number_format($data->total_net)) }}</span
                                 >
                             </th>
                         </tr>
@@ -130,7 +134,7 @@
                             <th>Bayar</th>
                             <th>
                                 <span class="float-end"
-                                    >{{ number_format($data->bayar_dp) }}</span
+                                    >{{ str_replace(',', '.', number_format($data->bayar_dp)) }}</span
                                 >
                             </th>
                         </tr>
@@ -139,19 +143,21 @@
                             <th>Sisa Kurang</th>
                             <th>
                                 <span class="float-end"
-                                    >{{ number_format($data->sisa_kurang) }}</span
+                                    >{{ str_replace(',', '.', number_format($data->sisa_kurang)) }}</span
                                 >
                             </th>
                         </tr>
                     </thead>
                 </table>
             </div>
-        </div>
 
         <script
             src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
             crossorigin="anonymous"
         ></script>
+        <script>
+            window.print();
+        </script>
     </body>
 </html>

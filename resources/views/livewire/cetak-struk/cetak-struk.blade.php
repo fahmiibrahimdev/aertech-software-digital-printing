@@ -58,9 +58,13 @@
 												<span class="badge tw-bg-red-200">Belum Bayar</span>
 											@endif
 										</td>
+										@if( $row->status_lunas == "1" || $row->status_lunas == "0"  ) 
                                         <td class="p-3 text-center">
                                             <a class="btn tw-bg-cyan-100" href="{{ url('cetak-invoice', $row->id) }}" target="blank"><i class="fas fa-print"></i> Cetak</a>
                                         </td>
+                                        @else
+                                        
+                                        @endif
                                     </tr>
                                     @empty
                                     <tr class="text-center p-3">
@@ -79,11 +83,6 @@
                 </div>
             </div>
         </div>
-        <button
-            class="tw-fixed tw-right-[30px] tw-bottom-[50px] tw-w-14 tw-h-14 tw-shadow-2xl tw-rounded-full tw-bg-slate-600 tw-z-40 text-white hover:tw-bg-slate-900 hover:tw-border-slate-600 lg:tw-hidden"
-            data-toggle="modal" data-target="#tambahDataModal">
-            <i class="far fa-plus"></i>
-        </button>
     </div>
 
 </div>

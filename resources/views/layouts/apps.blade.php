@@ -170,7 +170,7 @@
                             <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i
                                     class="far fa-hand-holding-usd"></i><span>Keuangan</span></a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a href="{{ url('admin/pembayaran-belum-lunas') }}" class="nav-link">Pembayaran Belum Lunas (coming soon)</a></li>
+                                <li class="nav-item"><a href="{{ url('admin/pembayaran-belum-lunas') }}" class="nav-link">Pembayaran Belum Lunas</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -226,7 +226,15 @@
                             <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i
                                     class="far fa-hand-holding-usd"></i><span>Keuangan</span></a>
                             <ul class="dropdown-menu">
-                                <li class="nav-item"><a href="{{ url('pembayaran-belum-lunas') }}" class="nav-link">Pembayaran Belum Lunas (coming soon)</a></li>
+                                <li class="nav-item"><a href="{{ url('pembayaran-belum-lunas') }}" class="nav-link">Pembayaran Belum Lunas</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" data-toggle="dropdown" class="nav-link has-dropdown"><i
+                                    class="far fa-file-archive"></i><span>Laporan</span></a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a href="{{ url('status-order') }}" class="nav-link">Status Order</a></li>
+                                <li class="nav-item"><a href="{{ url('cetak-struk') }}" class="nav-link">Cetak Struk</a></li>
                             </ul>
                         </li>
 

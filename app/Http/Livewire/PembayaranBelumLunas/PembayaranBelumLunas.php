@@ -42,6 +42,7 @@ class PembayaranBelumLunas extends Component
 					->where('pembayarans.status_lunas', "0")
 					->where(function($query) use ($searchTerm)
 					{
+						$query->where('order_kerjas.nomor_transaksi', 'LIKE', $searchTerm);
 						$query->where('order_kerjas.tanggal', 'LIKE', $searchTerm);
 						$query->orWhere('order_kerjas.deadline', 'LIKE', $searchTerm);
 						$query->orWhere('order_kerjas.deadline_time', 'LIKE', $searchTerm);
@@ -84,18 +85,20 @@ class PembayaranBelumLunas extends Component
 				$total_sisa_kurang = (int)$this->total_net - (int)$this->bayar_dp;
 				if( $total_sisa_kurang == 0 )
 				{
-					$data = Pembayaran::findOrFail($this->dataId);
+					$data = Pembayaran::where('id_order_kerja', $this->dataId);
+				// 	dd($data);
 					$data->update([
 						'bayar_dp'   	=> $this->bayar_dp,
 						'sisa_kurang'   => $total_sisa_kurang,
-						'status_lunas'	=> 1,
+						'status_lunas'	=> '1',
 					]);
 				} else {
-					$data = Pembayaran::findOrFail($this->dataId);
+					$data = Pembayaran::where('id_order_kerja', $this->dataId);
+				// 	dd($data);
 					$data->update([
 						'bayar_dp'   	=> $this->bayar_dp,
 						'sisa_kurang'   => $total_sisa_kurang,
-						'status_lunas'	=> 0,
+						'status_lunas'	=> '0',
 					]);
 				}
 				

@@ -164,7 +164,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label for="sisa_kurang">Sisa Kurang Pembayaran</label>
-                                    <input type="number" name="sisa_kurang" id="sisa_kurang" class="form-control" value="0" readonly>
+                                    <input type="number" name="sisa_kurang" id="sisa_kurang" class="form-control" value="1" readonly>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -247,5 +247,4 @@
     });
 </script>
 @endsection
-
 @endsection

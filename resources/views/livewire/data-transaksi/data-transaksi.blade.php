@@ -10,9 +10,9 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div class="card card-success">
+                <div class="card card-info">
                     <div class="card-header">
-                        <h4 class="tw-text-xl tw-text-black tw-font-bold tw-font-roboto">Data Transaksi</h4>
+                        <h4 class="tw-text-xl tw-text-black tw-font-bold tw-font-roboto">Data Transaksi <a class="btn btn-info ml-auto" href="@if(Auth::user()->hasRole('admin')){{ url('admin/data-transaksi') }} @else {{ url('data-transaksi') }} @endif"><i class="fas fa-sync"></i></a></h4>
                     </div>
                     <div class="card-body px-0">
                         <div class="row mb-3 px-4">
@@ -31,7 +31,7 @@
                                     placeholder="Search here.." wire:model='searchTerm'>
                             </div>
                         </div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" wire:poll.5s>
                             <table class="tw-table-fixed tw-w-full tw-text-black tw-text-sm tw-border-t mt-4">
                                 <thead>
                                     <tr class="tw-bg-white tw-border-b tw-text-xs text-center text-uppercase">
@@ -49,9 +49,9 @@
                                             <td class="p-3">{{ $row->nama_customer }}</td>
                                             <td class="p-3">{{ $row->tanggal }}</td>
                                             <td class="p-3">{{ $row->deadline }} {{ $row->deadline_time }}</td>
-                                            <td class="p-3">Rp{{ number_format($row->total) }},00</td>
+                                            <td class="p-3">Rp{{ number_format($row->total, 0, ',', '.') }},00</td>
                                             <td class="p-3 text-center">
-                                                <a href="@if(Auth::user()->hasRole('admin')){{ route('admin/pembayaran', Crypt::encrypt($row->id)) }}@else{{ route('pembayaran', Crypt::encrypt($row->id)) }}@endif" class="btn btn-sm btn-primary">
+                                                <a href="@if(Auth::user()->hasRole('admin')){{ route('admin/pembayaran', Crypt::encrypt($row->id)) }}@else{{ route('pembayaran', Crypt::encrypt($row->id)) }}@endif" target="_BLANK" class="btn btn-sm btn-primary">
                                                     <i class="fas fa-donate"></i>
                                                 </a>
                                                 {{-- <a href="{{ route('edit-order-kerja', $row->id) }}" class="btn btn-sm btn-warning">

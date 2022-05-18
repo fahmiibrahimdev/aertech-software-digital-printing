@@ -45,7 +45,6 @@ Route::get('/cache-clear', function() {
     return 'Cache Clear Success!';
 });
 
-
 Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::get('tracking-order', TrackingOrder::class)->name('tracking-order');
 
@@ -56,6 +55,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('get-data-nama-pekerjaan/{id}/{idLevelCustomer}', 'App\Http\Controllers\AllController@getDataNamaPekerjaan')->name('get-data-nama-pekerjaan');
     Route::get('get-data-id-bahan-dan-pekerjaan/{id}', 'App\Http\Controllers\AllController@getDataIdBahanDanPekerjaan')->name('get-data-id-bahan-dan-pekerjaan');
     Route::get('get-data-pekerjaan-dan-id-mesin/{id_pekerjaan}', 'App\Http\Controllers\AllController@getDataPekerjaanDanIdMesin')->name('get-data-pekerjaan-dan-id-mesin');
+    Route::get('cetak-invoice/{id}', 'App\Http\Controllers\AllController@cetakInvoice')->name('cetak-invoice');
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
@@ -86,7 +86,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::get('admin/daftar-user', DataUser::class)->name('daftar-user');
     Route::get('admin/pembayaran-belum-lunas', PembayaranBelumLunas::class)->name('pembayaran-belum-lunas');
     Route::get('admin/cetak-struk', CetakStruk::class)->name('cetak-struk');
-	Route::get('cetak-invoice/{id}', 'App\Http\Controllers\AllController@cetakInvoice')->name('cetak-invoice');
 });
 
 Route::group(['middleware' => ['auth', 'role:desainer']], function() {
@@ -98,11 +97,13 @@ Route::group(['middleware' => ['auth', 'role:desainer']], function() {
     Route::get('order-kerja', OrderKerja::class)->name('order-kerja');
     Route::get('data-transaksi', DataTransaksi::class)->name('data-transaksi');
     Route::post('pembayaran', 'App\Http\Controllers\PembayaranController@store')->name('pembayaran.store');
+    Route::get('pembayaran-belum-lunas', PembayaranBelumLunas::class)->name('pembayaran-belum-lunas');
     Route::get('/pembayaran/{id}', 'App\Http\Controllers\PembayaranController@pembayaran')->name('pembayaran');
     Route::get('stock-masuk', StockMasuk::class)->name('stock-masuk');
     Route::get('level-customer', LevelCustomer::class)->name('level-customer');
     Route::get('kategori', Kategori::class)->name('kategori');
     Route::get('daftar-stock', DaftarStock::class)->name('daftar-stock');
+    Route::get('cetak-struk', CetakStruk::class)->name('cetak-struk');
 });
 
 Route::group(['middleware' => ['auth', 'role:produksi']], function() {

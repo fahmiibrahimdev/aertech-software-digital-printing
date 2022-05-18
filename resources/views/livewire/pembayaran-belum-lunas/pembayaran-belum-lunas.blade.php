@@ -32,6 +32,7 @@
                             <table class="tw-table-fixed tw-w-full tw-text-black tw-text-sm tw-border-t mt-4">
                                 <thead>
                                     <tr class="tw-bg-white tw-border-b tw-text-xs text-center text-uppercase">
+                                        <th class="p-3">Kode Resi</th>
                                         <th class="p-3">Nm Cust</th>
                                         <th class="p-3">Tgl Pmbyrn DP</th>
                                         <th class="p-3">Total</th>
@@ -44,11 +45,12 @@
                                     @foreach ($data as $row)
                                         @if ($row->status_lunas == NULL)
                                         <tr class="tw-bg-white tw-border-b hover:tw-bg-gray-50">
+                                            <td class="p-3">{{ $row->nomor_transaksi }}</td>
                                             <td class="p-3">{{ $row->nama_customer }}</td>
                                             <td class="p-3">{{ $row->updated_at }}</td>
-                                            <td class="p-3">Rp{{ number_format($row->total_net) }},00</td>
-                                            <td class="p-3">Rp{{ number_format($row->bayar_dp) }},00</td>
-                                            <td class="p-3">Rp{{ number_format($row->sisa_kurang) }},00</td>
+                                            <td class="p-3">Rp{{ number_format($row->total_net, 0, ',', '.') }},00</td>
+                                            <td class="p-3">Rp{{ number_format($row->bayar_dp, 0, ',', '.') }},00</td>
+                                            <td class="p-3">Rp{{ number_format($row->sisa_kurang, 0, ',', '.') }},00</td>
                                             <td class="p-3 text-center">
                                                 <button class="btn btn-primary" data-toggle="modal" data-target="#ubahDataModal" wire:click="edit({{ $row->id }})">
 													<i class="fas fa-donate"></i>
@@ -88,18 +90,21 @@
 								<div class="form-group">
 									<label for="total_net">Total Net</label>
 									<input type="number" wire:model="total_net" id="total_net" class="form-control" readonly>
+									<small class="form-text text-muted">Rp {{ number_format((int)$total_net, 0, ',', '.') }},00</small>
 								</div>
 							</div>
 							<div class="col-lg-6">
 								<div class="form-group">
 									<label for="sisa_kurang">Sisa Kurang</label>
 									<input type="number" wire:model="sisa_kurang" id="sisa_kurang" class="form-control" readonly>
+									<small class="form-text text-muted">Rp {{ number_format((int)$sisa_kurang, 0, ',', '.') }},00</small>
 								</div>
 							</div>
 						</div>
                         <div class="form-group">
                             <label for="bayar_dp">Pembayaran</label>
                             <input type="number" wire:model="bayar_dp" id="bayar_dp" class="form-control">
+                            <small class="form-text text-muted">Rp {{ number_format((int)$bayar_dp, 0, ',', '.') }},00</small>
                         </div>
                     </div>
                     <div class="modal-footer">

@@ -49,7 +49,7 @@ class StatusOrder extends Component
                         $query->orWhere('detail_order_kerjas.qty', 'LIKE', $searchTerm);
                         $query->orWhere('detail_order_kerjas.status', 'LIKE', $searchTerm);
                     })
-                    ->orderBy('detail_order_kerjas.id', 'ASC')
+                    ->orderBy('detail_order_kerjas.id', 'DESC')
                     ->paginate($lengthData);
         } else {
             $data = OrderKerja::select('order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_bahans.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status')
@@ -71,7 +71,7 @@ class StatusOrder extends Component
                         $query->orWhere('detail_order_kerjas.qty', 'LIKE', $searchTerm);
                         $query->orWhere('detail_order_kerjas.status', 'LIKE', $searchTerm);
                     })
-                    ->orderBy('detail_order_kerjas.id', 'ASC')
+                    ->orderBy('detail_order_kerjas.id', 'DESC')
                     ->paginate($lengthData);
         }
 

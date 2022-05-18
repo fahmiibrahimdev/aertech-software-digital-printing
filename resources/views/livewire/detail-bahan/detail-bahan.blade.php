@@ -68,7 +68,7 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($data as $row)
-                                    <tr class="tw-bg-white tw-border-b hover:tw-bg-gray-50">
+                                    <tr class="tw-bg-white tw-border-b hover:tw-bg-gray-50 text-uppercase">
                                         <td class="p-3"><span class="badge tw-bg-green-200">{{ $row->nama_level }}</span></td>
                                         <td class="p-3">{{ $row->nama_printer }}</td>
                                         <td class="p-3">{{ $row->nama_pekerjaan }}</td>
@@ -154,7 +154,7 @@
 								<div class="form-group">
 									<label for="id_bahan">Bahan</label>
 									<select wire:model="id_bahan" id="id_bahan" class="form-control">
-											<option selected disabled>-- Select Option --</option>
+											<option value="NULL">-- Select Option --</option>
 										@foreach ($dataBahan as $bahan)
 											<option value="{{ $bahan->id }}">{{ $bahan->nama_barang }}</option>
 										@endforeach
@@ -191,6 +191,7 @@
                                 <div class="form-group">
                                     <label for="harga_jual">Harga Jual</label>
                                     <input type="number" min="1" wire:model="harga_jual" id="harga_jual" class="form-control">
+                                    <small class="form-text text-muted">Rp {{ number_format((int)$harga_jual, 0, ',', '.') }},00</small>
                                 </div>
                             </div>
                             <div class="col-lg-6">
@@ -247,6 +248,7 @@
                                 <div class="form-group">
                                     <label for="id_bahan">Bahan</label>
                                     <select wire:model="id_bahan" id="id_bahan" class="form-control">
+                                        <option value="NULL">-- Select Option --</option>
                                         @foreach ($dataBahan as $bahan)
                                         <option value="{{ $bahan->id }}">{{ $bahan->nama_barang }}</option>
                                         @endforeach
@@ -254,7 +256,14 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <div class="form-group">
+							<label for="id_level_customer">Level Customer</label>
+							<select wire:model="id_level_customer" id="id_level_customer" class="form-control">
+								@foreach ($dataLevelCustomer as $level)
+									<option value="{{ $level->id }}">{{ $level->nama_level }}</option>
+								@endforeach
+							</select>
+						</div>
                         <div class="form-group">
                             <label>Range Qty</label>
                             <div class="row">
@@ -274,6 +283,7 @@
                                 <div class="form-group">
                                     <label for="harga_jual">Harga Jual</label>
                                     <input type="number" min="1" wire:model="harga_jual" id="harga_jual" class="form-control">
+                                    <small class="form-text text-muted">Rp {{ number_format((int)$harga_jual, 0, ',', '.') }},00</small>
                                 </div>
                             </div>
                             <div class="col-lg-6">
