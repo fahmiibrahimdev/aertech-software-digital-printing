@@ -25,6 +25,9 @@ class KategoriSeeder extends Seeder
 			[
 				'nama_kategori' => 'A3+'
 			],
+			[
+				'nama_kategori' => 'DESAIN'
+			],
 		];
 		DB::table('kategoris')->insert($data);
     }

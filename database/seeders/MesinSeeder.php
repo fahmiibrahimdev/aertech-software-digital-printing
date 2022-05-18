@@ -18,23 +18,27 @@ class MesinSeeder extends Seeder
     {
         $data = [
             [
-                'kode_printer'  => 'C-600',
-                'nama_printer'  => 'C-600',
-                'status_perkalian_ukuran'  => '1',
-            ],
-            [
-                'kode_printer'  => 'COLD',
-                'nama_printer'  => 'LAM-COLD',
+                'id_kategori'  	=> '1',
+                'kode_printer'  => '001',
+                'nama_printer'  => 'MIMAKI',
                 'status_perkalian_ukuran'  => '0',
             ],
             [
-                'kode_printer'  => 'HOT',
-                'nama_printer'  => 'LAM-HOT',
+				'id_kategori'  	=> '2',
+                'kode_printer'  => '002',
+                'nama_printer'  => 'GONGZHENG',
                 'status_perkalian_ukuran'  => '0',
             ],
             [
-                'kode_printer'  => 'JASA',
-                'nama_printer'  => 'JASA',
+				'id_kategori'  	=> '3',
+                'kode_printer'  => '003',
+                'nama_printer'  => 'FUJI XEROX',
+                'status_perkalian_ukuran'  => '0',
+            ],
+            [
+				'id_kategori'  	=> '4',
+                'kode_printer'  => '004',
+                'nama_printer'  => 'PC COM',
                 'status_perkalian_ukuran'  => '0',
             ],
         ];

@@ -19,8 +19,11 @@ class DatabaseSeeder extends Seeder
 			SettingTanggalSeeder::class,
 			KategoriSeeder::class,
 			LevelCustomerSeeder::class,
-            // MesinSeeder::class,
-            // NamaPekerjaanSeeder::class,
+            MesinSeeder::class,
+            NamaPekerjaanSeeder::class,
+			BahanSeeder::class,
+			DetailBahanSeeder::class,
+			CustomerSeeder::class,
         ]);
     }
 }
