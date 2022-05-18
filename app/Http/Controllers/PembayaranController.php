@@ -32,8 +32,31 @@ class PembayaranController extends Controller
 
     public function store(Request $request)
     {
-        if( $request->sisa_kurang == 0 )
-        {
+		if( $request->total_net == 0 && $request->sisa_kurang == 1 )
+		{
+			$total = OrderKerja::where('id', $request->id_order_kerja)->first()->total;
+
+			Pembayaran::create([
+                'id_user'           =>  Auth::user()->id,
+                'id_order_kerja'    =>  $request->id_order_kerja,
+                'discount_invoice'  =>  $request->discount_invoice,
+                'discount_invoice'  =>  $request->discount_invoice,
+                'pembulatan'        =>  $request->pembulatan,
+                'total_net'         =>  $total,
+                'bayar_dp'          =>  $request->bayar_dp,
+                'sisa_kurang'       =>  $total,
+                'metode_pembayaran' =>  $request->metode_pembayaran,
+                'catatan_produksi'  =>  $request->catatan_produksi,
+                'pembayaran'        =>  '0',
+                'status_lunas'      =>  '0',
+            ]);
+            if( Auth::user()->hasRole('admin') )
+			{
+				return redirect()->route('cetak-invoice', $request->id_order_kerja);
+			} else {
+				return redirect()->route('data-transaksi');
+			}
+		}else if( $request->sisa_kurang == 0 ){
             $data = Pembayaran::create([
                 'id_user'           =>  Auth::user()->id,
                 'id_order_kerja'    =>  $request->id_order_kerja,
