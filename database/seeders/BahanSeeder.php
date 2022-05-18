@@ -18,85 +18,85 @@ class BahanSeeder extends Seeder
         $data = [
 			[
 				'id_kategori' 	=> '1',
-				'nama_kategori' => 'TRANSPARANT',
+				'nama_barang' 	=> 'TRANSPARANT',
 				'stock' 		=> '0',
 				'satuan' 		=> 'METER'
 			],
 			[
 				'id_kategori' 	=> '1',
-				'nama_kategori' => 'LUSTER',
+				'nama_barang' 	=> 'LUSTER',
 				'stock' 		=> '0',
 				'satuan' 		=> 'METER'
 			],
 			[
 				'id_kategori' 	=> '1',
-				'nama_kategori' => 'VINYL',
+				'nama_barang' 	=> 'VINYL',
 				'stock' 		=> '0',
 				'satuan' 		=> 'LEMBAR'
 			],
 			[
 				'id_kategori' 	=> '1',
-				'nama_kategori' => 'ONE WAY',
+				'nama_barang' 	=> 'ONE WAY',
 				'stock' 		=> '0',
 				'satuan' 		=> 'METER'
 			],
 			[
 				'id_kategori' 	=> '1',
-				'nama_kategori' => 'CLOTH SATIN',
+				'nama_barang' 	=> 'CLOTH SATIN',
 				'stock' 		=> '0',
 				'satuan' 		=> 'METER'
 			],
 			[
 				'id_kategori' 	=> '1',
-				'nama_kategori' => 'ALBATROS',
+				'nama_barang' 	=> 'ALBATROS',
 				'stock' 		=> '0',
 				'satuan' 		=> 'METER'
 			],
 			[
 				'id_kategori' 	=> '2',
-				'nama_kategori' => 'FLEXY KOREA 440 GSM',
+				'nama_barang' 	=> 'FLEXY KOREA 440 GSM',
 				'stock' 		=> '0',
 				'satuan' 		=> 'METER'
 			],
 			[
 				'id_kategori' 	=> '2',
-				'nama_kategori' => 'FLEXY FRONLITE 280 GSM',
+				'nama_barang' 	=> 'FLEXY FRONLITE 280 GSM',
 				'stock' 		=> '0',
 				'satuan' 		=> 'METER'
 			],
 			[
 				'id_kategori' 	=> '2',
-				'nama_kategori' => 'FLEXY BACKLITE 550 GSM',
+				'nama_barang' 	=> 'FLEXY BACKLITE 550 GSM',
 				'stock' 		=> '0',
 				'satuan' 		=> 'METER'
 			],
 			[
 				'id_kategori' 	=> '3',
-				'nama_kategori' => 'ART PAPER',
+				'nama_barang' 	=> 'ART PAPER',
 				'stock' 		=> '0',
 				'satuan' 		=> 'LEMBAR'
 			],
 			[
 				'id_kategori' 	=> '3',
-				'nama_kategori' => 'TRANSPARANT A3+',
+				'nama_barang' 	=> 'TRANSPARANT A3+',
 				'stock' 		=> '0',
 				'satuan' 		=> 'LEMBAR'
 			],
 			[
 				'id_kategori' 	=> '3',
-				'nama_kategori' => 'CHROMO',
+				'nama_barang' 	=> 'CHROMO',
 				'stock' 		=> '0',
 				'satuan' 		=> 'LEMBAR'
 			],
 			[
 				'id_kategori' 	=> '3',
-				'nama_kategori' => 'VYNIL A3+',
+				'nama_barang' 	=> 'VYNIL A3+',
 				'stock' 		=> '0',
 				'satuan' 		=> 'LEMBAR'
 			],
 			[
 				'id_kategori' 	=> '4',
-				'nama_kategori' => 'DESAIN',
+				'nama_barang' 	=> 'DESAIN',
 				'stock' 		=> '0',
 				'satuan' 		=> 'SET'
 			],
