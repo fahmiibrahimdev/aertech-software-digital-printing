@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::get('admin/harga', DetailBahan::class)->name('harga');
     Route::get('admin/customer', Customer::class)->name('customer');
     Route::get('admin/order-kerja', OrderKerja::class)->name('order-kerja');
+    Route::get('admin/edit-order-kerja/{id}', EditOrderKerja::class)->name('edit-order-kerja');
     Route::get('admin/data-transaksi', DataTransaksi::class)->name('admin/data-transaksi');
     Route::post('admin/pembayaran', 'App\Http\Controllers\PembayaranController@store')->name('admin/pembayaran.store');
     Route::get('admin/pembayaran/{id}', 'App\Http\Controllers\PembayaranController@pembayaran')->name('admin/pembayaran');
@@ -95,6 +96,7 @@ Route::group(['middleware' => ['auth', 'role:desainer']], function() {
     Route::get('harga', DetailBahan::class)->name('harga');
     Route::get('customer', Customer::class)->name('customer');
     Route::get('order-kerja', OrderKerja::class)->name('order-kerja');
+	Route::get('edit-order-kerja/{id}', EditOrderKerja::class)->name('edit-order-kerja');
     Route::get('data-transaksi', DataTransaksi::class)->name('data-transaksi');
     Route::post('pembayaran', 'App\Http\Controllers\PembayaranController@store')->name('pembayaran.store');
     Route::get('pembayaran-belum-lunas', PembayaranBelumLunas::class)->name('pembayaran-belum-lunas');

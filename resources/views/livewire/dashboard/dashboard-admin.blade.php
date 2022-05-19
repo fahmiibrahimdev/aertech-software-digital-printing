@@ -195,7 +195,6 @@
                                 <thead>
                                     <tr class="tw-bg-white tw-border-b tw-text-xs text-center text-uppercase">
                                         <th class="p-3">TGL</th>
-                                        <th class="p-3">NM Cust</th>
                                         <th class="p-3">Nm File</th>
                                         <th class="p-3">Printer</th>
                                         <th class="p-3">Nm Pkrjn</th>
@@ -205,39 +204,56 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($data as $row)
-                                    <tr class="tw-bg-white tw-border-b hover:tw-bg-gray-50">
-                                        <td class="p-3">{{ $row->tanggal }} 
-										@if($row->status_lunas == "0")
-											
-										@elseif($row->status_lunas == "1")
-											<i class="fas fa-check text-success"></i> </td>
-										@endif
-                                        <td class="p-3">{{ $row->nama_customer }}</td>
-                                        <td class="p-3">{{ $row->nama_file }}</td>
-                                        <td class="p-3 text-center">{{ $row->nama_printer }}</td>
-                                        <td class="p-3">{{ $row->nama_pekerjaan }}</td>
-                                        <td class="p-3 text-center">{{ $row->ukuran }}</td>
-                                        <td class="p-3 text-right">{{ $row->qty }}.00</td>
-                                        <td class="p-3 text-center">
-											@if ( $row->status == '1' )
-                                            	<button wire:click.prevent="konf({{ $row->id }})"
-                                                class="btn btn-sm btn-outline-info">Produksi</button>
-											@elseif($row->status == '3')
-												<button wire:click.prevent="konfirmasi({{ $row->id }})"
-                                                class="btn btn-sm btn-outline-success">TakingIt</button>
-											@elseif($row->status == '4')
-												<span class="badge tw-bg-green-200 tw-text-green-900">Selesai</span>
-                                            @endif
+								@foreach($data->groupBy('id_order_kerja') as $row)
+									<tr class="tw-border-b hover:tw-bg-gray-50">
+										<td class="p-3" colspan="6">
+											<h3>
+												<b>
+													ID: {{ $row[0]['id_order_kerja'] }} | {{ $row[0]['nama_customer'] }}
+													@if($row[0]['status_lunas'] == "0")
+
+													@elseif($row[0]['status_lunas'] == "1")
+														<i class="fas fa-check text-success"></i> </td>
+													@endif
+												</b>
+											</h3>
 										</td>
-                                    </tr>
-                                    @empty
-                                    <tr class="text-center p-3">
-                                        <td colspan="8">
-                                            No data available in table
-                                        </td>
-                                    </tr>
-                                    @endforelse
+										<td class="text-center p-3">
+										@if( $row[0]['sisa_kurang'] == 0 )
+
+										@else
+											@if($row[0]['status_lunas'] == "0")
+												<button wire:click.prevent="lunas({{ $row[0]['id'] }})"
+												class="btn btn-sm btn-outline-warning">Lunaskan</button>
+											@elseif($row[0]['status_lunas'] == "1")
+												<button wire:click.prevent="batalkanLunas({{ $row[0]['id'] }})"
+												class="btn btn-sm btn-outline-danger">Batalkan</button>
+											@endif
+										@endif
+										</td>
+									</tr>
+									@foreach ($row as $item)
+									<tr class="tw-bg-white tw-border-b hover:tw-bg-gray-50">
+										<td class="p-3">{{ $item['tanggal'] }} </td>
+										<td class="p-3">{{ $item['nama_file'] }}</td>
+										<td class="p-3 text-center">{{ $item['nama_printer'] }}</td>
+										<td class="p-3">{{ $item['nama_pekerjaan'] }}</td>
+										<td class="p-3 text-center">{{ $item['ukuran'] }}</td>
+										<td class="p-3 text-right">{{ $item['qty'] }}.00</td>
+										<td class="p-3 text-center">
+											@if ( $item['status'] == '1' )
+												<button wire:click.prevent="konf({{ $item['id'] }})"
+												class="btn btn-sm btn-outline-info">Produksi</button>
+											@elseif($item['status'] == '3')
+												<button wire:click.prevent="konfirmasi({{ $item['id'] }})"
+												class="btn btn-sm btn-outline-success">TakingIt</button>
+											@elseif($item['status'] == '4')
+												<span class="badge tw-bg-green-200 tw-text-green-900">Selesai</span>
+											@endif
+										</td>
+									</tr>
+									@endforeach
+								@endforeach
                                 </tbody>
                             </table>
                         </div>

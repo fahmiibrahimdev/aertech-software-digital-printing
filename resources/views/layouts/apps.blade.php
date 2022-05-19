@@ -481,7 +481,38 @@
 				}
 			});
 		});
-
+		window.addEventListener("swal:pelunasan", function () {
+			Swal.fire({
+				title: "Perhatikan!",
+				text: "Apa anda yakin ingin melunaskannya?.",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+				confirmButtonText: "Yes, Saya setuju!",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					livewire.emit("lunasKonfirm");
+					Swal.fire("Success!", "Data berhasil diubah!", "success");
+				}
+			});
+		});
+		window.addEventListener("swal:batalkanPelunasan", function () {
+			Swal.fire({
+				title: "Perhatikan!",
+				text: "Apa anda yakin ingin membatalkan pelunasan nya?.",
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+				confirmButtonText: "Yes, Saya setuju!",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					livewire.emit("batalkanLunasKonfirm");
+					Swal.fire("Success!", "Data berhasil diubah!", "success");
+				}
+			});
+		});
 	</script>
     <script>
         window.onbeforeunload = function () {

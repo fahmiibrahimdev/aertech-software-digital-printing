@@ -94,6 +94,7 @@
                         @endforeach
                     </tbody>
                     <thead>
+					@if( $data->status_lunas == "0" )
                         <tr class="text-end">
                             <th style="padding-top: 10px"></th>
                             <th style="padding-top: 10px">Total</th>
@@ -147,6 +148,61 @@
                                 >
                             </th>
                         </tr>
+					@else( $data->status_lunas == "1" )
+						<tr class="text-end">
+                            <th style="padding-top: 10px"></th>
+                            <th style="padding-top: 10px">Total</th>
+                            <th style="padding-top: 10px">
+                                <span class="float-end"
+                                    >{{ str_replace(',', '.', number_format($data->total)) }}</span>
+                            </th>
+                        </tr>
+                        <tr class="text-end">
+                            <th></th>
+                            <th>Pembulatan</th>
+                            <th>
+                                <span class="float-end"
+                                    >{{ str_replace(',', '.', number_format($data->pembulatan)) }}</span
+                                >
+                            </th>
+                        </tr>
+                        <tr class="text-end">
+                            <th></th>
+                            <th>Discount</th>
+                            <th>
+                                <span class="float-end"
+                                    >{{ str_replace(',', '.', number_format($data->discount_invoice)) }}</span
+                                >
+                            </th>
+                        </tr>
+                        <tr class="text-end">
+                            <th></th>
+                            <th>Total Net</th>
+                            <th>
+                                <span class="float-end"
+                                    >{{ str_replace(',', '.', number_format($data->total_net)) }}</span
+                                >
+                            </th>
+                        </tr>
+                        <tr class="text-end">
+                            <th></th>
+                            <th>Bayar</th>
+                            <th>
+                                <span class="float-end"
+                                    >{{ str_replace(',', '.', number_format($data->total_net)) }}</span
+                                >
+                            </th>
+                        </tr>
+						<tr class="text-end">
+                            <th></th>
+                            <th>Sisa Kurang</th>
+                            <th>
+                                <span class="float-end"
+                                    >0</span
+                                >
+                            </th>
+                        </tr>
+					@endif
                     </thead>
                 </table>
             </div>

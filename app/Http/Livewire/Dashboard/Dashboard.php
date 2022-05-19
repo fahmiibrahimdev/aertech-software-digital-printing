@@ -20,6 +20,8 @@ class Dashboard extends Component
 	protected $listeners = [
         'konfirmasiConfirmed' => 'active',
 		'konfirmasiConfirmedProd' => 'actives',
+		'lunasKonfirm' => 'lunasKonfir',
+		'batalkanLunasKonfirm' => 'batalkanLunasKonfir',
     ];
     public $tanggal;
     public $updateMode = false;
@@ -135,7 +137,7 @@ class Dashboard extends Component
 			$lengthData = $this->lengthData;
 				
 			if( $this->idStatus == 0 ){
-				$data = OrderKerja::select('detail_order_kerjas.id','order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas')
+				$data = OrderKerja::select('detail_order_kerjas.id','order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas', 'detail_order_kerjas.id_order_kerja', 'pembayarans.sisa_kurang')
 						->join('pembayarans', 'pembayarans.id_order_kerja', 'order_kerjas.id')
 						->join('detail_order_kerjas', 'detail_order_kerjas.id_order_kerja', 'order_kerjas.id')
 						->join('customers', 'customers.id', 'order_kerjas.id_customer')
@@ -145,7 +147,9 @@ class Dashboard extends Component
 						->join('mesins', 'mesins.id', 'nama_pekerjaans.id_mesin')
 						->whereBetween('order_kerjas.tanggal', [$this->dariTanggal, $this->sampaiTanggal])
 						->where(function($query) use ($searchTerm) {
-							$query->where('order_kerjas.tanggal', 'LIKE', $searchTerm);
+							$query->where('order_kerjas.id', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.nomor_transaksi', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.tanggal', 'LIKE', $searchTerm);
 							$query->orWhere('customers.nama_customer', 'LIKE', $searchTerm);
 							$query->orWhere('detail_order_kerjas.nama_file', 'LIKE', $searchTerm);
 							$query->orWhere('mesins.nama_printer', 'LIKE', $searchTerm);
@@ -155,9 +159,10 @@ class Dashboard extends Component
 							$query->orWhere('detail_order_kerjas.status', 'LIKE', $searchTerm);
 						})
 						->orderBy('detail_order_kerjas.id', 'DESC')
+						// ->groupBy('detail_order_kerjas.id_order_kerja')
 						->paginate($lengthData);
 			} else {
-				$data = OrderKerja::select('order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas')
+				$data = OrderKerja::select('order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas', 'detail_order_kerjas.id_order_kerja', 'pembayarans.sisa_kurang')
 						->join('pembayarans', 'pembayarans.id_order_kerja', 'order_kerjas.id')
 						->join('detail_order_kerjas', 'detail_order_kerjas.id_order_kerja', 'order_kerjas.id')
 						->join('customers', 'customers.id', 'order_kerjas.id_customer')
@@ -168,7 +173,9 @@ class Dashboard extends Component
 						->where('detail_order_kerjas.status', $this->idStatus)
 						->whereBetween('order_kerjas.tanggal', [$this->dariTanggal, $this->sampaiTanggal])
 						->where(function($query) use ($searchTerm) {
-							$query->where('order_kerjas.tanggal', 'LIKE', $searchTerm);
+							$query->where('order_kerjas.id', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.nomor_transaksi', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.tanggal', 'LIKE', $searchTerm);
 							$query->orWhere('customers.nama_customer', 'LIKE', $searchTerm);
 							$query->orWhere('detail_order_kerjas.nama_file', 'LIKE', $searchTerm);
 							$query->orWhere('mesins.nama_printer', 'LIKE', $searchTerm);
@@ -178,6 +185,7 @@ class Dashboard extends Component
 							$query->orWhere('detail_order_kerjas.status', 'LIKE', $searchTerm);
 						})
 						->orderBy('detail_order_kerjas.id', 'DESC')
+						// ->groupBy('detail_order_kerjas.id_order_kerja')
 						->paginate($lengthData);
 			}
             return view('livewire.dashboard.dashboard-admin', compact(
@@ -283,7 +291,7 @@ class Dashboard extends Component
 			$lengthData = $this->lengthData;
 				
 			if( $this->idStatus == 0 ){
-				$data = OrderKerja::select('detail_order_kerjas.id','order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas')
+				$data = OrderKerja::select('detail_order_kerjas.id','order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas', 'detail_order_kerjas.id_order_kerja', 'pembayarans.sisa_kurang')
 						->join('pembayarans', 'pembayarans.id_order_kerja', 'order_kerjas.id')
 						->join('detail_order_kerjas', 'detail_order_kerjas.id_order_kerja', 'order_kerjas.id')
 						->join('customers', 'customers.id', 'order_kerjas.id_customer')
@@ -293,7 +301,9 @@ class Dashboard extends Component
 						->join('mesins', 'mesins.id', 'nama_pekerjaans.id_mesin')
 						->whereBetween('order_kerjas.tanggal', [$this->dariTanggal, $this->sampaiTanggal])
 						->where(function($query) use ($searchTerm) {
-							$query->where('order_kerjas.tanggal', 'LIKE', $searchTerm);
+							$query->where('order_kerjas.id', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.nomor_transaksi', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.tanggal', 'LIKE', $searchTerm);
 							$query->orWhere('customers.nama_customer', 'LIKE', $searchTerm);
 							$query->orWhere('detail_order_kerjas.nama_file', 'LIKE', $searchTerm);
 							$query->orWhere('mesins.nama_printer', 'LIKE', $searchTerm);
@@ -305,7 +315,7 @@ class Dashboard extends Component
 						->orderBy('detail_order_kerjas.id', 'ASC')
 						->paginate($lengthData);
 			} else {
-				$data = OrderKerja::select('order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas')
+				$data = OrderKerja::select('order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas', 'detail_order_kerjas.id_order_kerja', 'pembayarans.sisa_kurang')
 						->join('pembayarans', 'pembayarans.id_order_kerja', 'order_kerjas.id')
 						->join('detail_order_kerjas', 'detail_order_kerjas.id_order_kerja', 'order_kerjas.id')
 						->join('customers', 'customers.id', 'order_kerjas.id_customer')
@@ -316,7 +326,9 @@ class Dashboard extends Component
 						->where('detail_order_kerjas.status', $this->idStatus)
 						->whereBetween('order_kerjas.tanggal', [$this->dariTanggal, $this->sampaiTanggal])
 						->where(function($query) use ($searchTerm) {
-							$query->where('order_kerjas.tanggal', 'LIKE', $searchTerm);
+							$query->where('order_kerjas.id', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.nomor_transaksi', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.tanggal', 'LIKE', $searchTerm);
 							$query->orWhere('customers.nama_customer', 'LIKE', $searchTerm);
 							$query->orWhere('detail_order_kerjas.nama_file', 'LIKE', $searchTerm);
 							$query->orWhere('mesins.nama_printer', 'LIKE', $searchTerm);
@@ -328,7 +340,6 @@ class Dashboard extends Component
 						->orderBy('detail_order_kerjas.id', 'ASC')
 						->paginate($lengthData);
 			}
-
             return view('livewire.dashboard.dashboard-admin', compact(
                 'pendapatanHariIni', 'transaksiHariIni', 'produksiHariIni', 'finishingHariIni', 'diambilHariIni',
                 'pendapatanMingguIni', 'transaksiMingguIni', 'produksiMingguIni', 'finishingMingguIni', 'diambilMingguIni',
@@ -343,7 +354,7 @@ class Dashboard extends Component
 			$lengthData = $this->lengthData;
 				
 			if( $this->idStatus == 0 ){
-				$data = OrderKerja::select('detail_order_kerjas.id','order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas')
+				$data = OrderKerja::select('detail_order_kerjas.id','order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas', 'detail_order_kerjas.id_order_kerja', 'pembayarans.sisa_kurang')
 						->join('pembayarans', 'pembayarans.id_order_kerja', 'order_kerjas.id')
 						->join('detail_order_kerjas', 'detail_order_kerjas.id_order_kerja', 'order_kerjas.id')
 						->join('customers', 'customers.id', 'order_kerjas.id_customer')
@@ -353,7 +364,9 @@ class Dashboard extends Component
 						->join('mesins', 'mesins.id', 'nama_pekerjaans.id_mesin')
 						->whereBetween('order_kerjas.tanggal', [$this->dariTanggal, $this->sampaiTanggal])
 						->where(function($query) use ($searchTerm) {
-							$query->where('order_kerjas.tanggal', 'LIKE', $searchTerm);
+							$query->where('order_kerjas.id', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.nomor_transaksi', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.tanggal', 'LIKE', $searchTerm);
 							$query->orWhere('customers.nama_customer', 'LIKE', $searchTerm);
 							$query->orWhere('detail_order_kerjas.nama_file', 'LIKE', $searchTerm);
 							$query->orWhere('mesins.nama_printer', 'LIKE', $searchTerm);
@@ -365,7 +378,7 @@ class Dashboard extends Component
 						->orderBy('detail_order_kerjas.id', 'ASC')
 						->paginate($lengthData);
 			} else {
-				$data = OrderKerja::select('order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas')
+				$data = OrderKerja::select('order_kerjas.tanggal', 'customers.nama_customer', 'detail_order_kerjas.nama_file', 'mesins.nama_printer', 'nama_pekerjaans.nama_pekerjaan', 'detail_order_kerjas.ukuran', 'detail_order_kerjas.qty', 'detail_order_kerjas.status', 'pembayarans.status_lunas', 'detail_order_kerjas.id_order_kerja', 'pembayarans.sisa_kurang')
 						->join('pembayarans', 'pembayarans.id_order_kerja', 'order_kerjas.id')
 						->join('detail_order_kerjas', 'detail_order_kerjas.id_order_kerja', 'order_kerjas.id')
 						->join('customers', 'customers.id', 'order_kerjas.id_customer')
@@ -376,7 +389,9 @@ class Dashboard extends Component
 						->where('detail_order_kerjas.status', $this->idStatus)
 						->whereBetween('order_kerjas.tanggal', [$this->dariTanggal, $this->sampaiTanggal])
 						->where(function($query) use ($searchTerm) {
-							$query->where('order_kerjas.tanggal', 'LIKE', $searchTerm);
+							$query->where('order_kerjas.id', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.nomor_transaksi', 'LIKE', $searchTerm);
+							$query->orWhere('order_kerjas.tanggal', 'LIKE', $searchTerm);
 							$query->orWhere('customers.nama_customer', 'LIKE', $searchTerm);
 							$query->orWhere('detail_order_kerjas.nama_file', 'LIKE', $searchTerm);
 							$query->orWhere('mesins.nama_printer', 'LIKE', $searchTerm);
@@ -461,5 +476,31 @@ class Dashboard extends Component
             'id_user_finishing' => Auth::user()->id,
             'tanggal_finishing' => new DateTime()
         ));
+    }
+
+	public function lunas($id)
+	{
+		$this->idRemoved = $id;
+        $this->dispatchBrowserEvent('swal:pelunasan');
+	}
+
+	public function lunasKonfir()
+    {
+        $id_order_kerja = DetailOrderKerja::where('id', $this->idRemoved)->first()->id_order_kerja;
+		$data = Pembayaran::where('id_order_kerja', $id_order_kerja)->first();
+        $data->update(array('status_lunas' => '1'));
+    }
+
+	public function batalkanLunas($id)
+	{
+		$this->idRemoved = $id;
+        $this->dispatchBrowserEvent('swal:batalkanPelunasan');
+	}
+
+	public function batalkanLunasKonfir()
+    {
+        $id_order_kerja = DetailOrderKerja::where('id', $this->idRemoved)->first()->id_order_kerja;
+		$data = Pembayaran::where('id_order_kerja', $id_order_kerja)->first();
+        $data->update(array('status_lunas' => '0'));
     }
 }

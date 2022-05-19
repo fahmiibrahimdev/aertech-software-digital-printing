@@ -54,12 +54,9 @@
                                                 <a href="@if(Auth::user()->hasRole('admin')){{ route('admin/pembayaran', Crypt::encrypt($row->id)) }}@else{{ route('pembayaran', Crypt::encrypt($row->id)) }}@endif" target="_BLANK" class="btn btn-sm btn-primary">
                                                     <i class="fas fa-donate"></i>
                                                 </a>
-                                                {{-- <a href="{{ route('edit-order-kerja', $row->id) }}" class="btn btn-sm btn-warning">
+                                                <a href="@if( Auth::user()->hasRole('admin') ){{ url('admin/edit-order-kerja', $row->id) }}@else{{ url('edit-order-kerja', $row->id) }}@endif" class="btn btn-sm btn-warning">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <button class="btn btn-sm btn-danger" wire:click.prevent="deleteConfirm({{ $row->id }})">
-                                                    <i class="fas fa-trash"></i>
-                                                </button> --}}
                                             </td>
                                         </tr>
                                         @else
