@@ -20,7 +20,11 @@
     <body style="font-family: Inter, sans-serif">
 			<div class="text-center">
 				<h3><b>SINTESA DIGITAL PRINTING</b></h3>
-				<p>Subang, Jawa Barat.</p>
+				<small>Jl Otto Iskandardinata Subang, Kab. Subang (samping masjid assalam), Jawa Barat.</small>
+				<small>0812-1246-8080</small>
+				<small>sintesadigitalprint@gmail.com</small>
+				<small><br>IG: sintesadigiprint</small>
+
 			</div>
             <hr style="border-top: 5px dashed black" />
             <div id="customer" class="mt-3">
@@ -63,9 +67,6 @@
                                 NAMA FILE
                             </th>
                             <th class="text-end" style="padding-top: 10px; padding-bottom: 10px">
-                                QTY
-                            </th>
-                            <th class="text-end" style="padding-top: 10px; padding-bottom: 10px">
                                 TOTAL
                             </th>
                         </tr>
@@ -75,7 +76,7 @@
                         <tr class="align-middle">
                             <td style="padding-top: 5px;">
                                 <b>{{ $row->nama_file }}</b> <br />
-                                {{ $row->keterangan }}_{{ $row->nama_barang }} <br />
+                                {{ $row->keterangan }}_{{ $row->nama_barang }} Qty: {{ $row->qty }} Item <br />
                                 @if( $row->laminasi_meter || $row->laminasi_a3 )
                                     LAMINASI <br />
                                 @else
@@ -87,7 +88,6 @@
                                 
                                 @endif
                             </td>
-                            <td class="text-end"><b>{{ $row->qty }}.00</b></td>
                             <td class="text-end"><b>{{ str_replace(',', '.', number_format($row->total)) }}</b>
                             </td>
                         </tr>
@@ -96,7 +96,6 @@
                     <thead>
 					@if( $data->status_lunas == "0" )
                         <tr class="text-end">
-                            <th style="padding-top: 10px"></th>
                             <th style="padding-top: 10px">Total</th>
                             <th style="padding-top: 10px">
                                 <span class="float-end"
@@ -104,7 +103,6 @@
                             </th>
                         </tr>
                         <tr class="text-end">
-                            <th></th>
                             <th>Pembulatan</th>
                             <th>
                                 <span class="float-end"
@@ -113,7 +111,6 @@
                             </th>
                         </tr>
                         <tr class="text-end">
-                            <th></th>
                             <th>Discount</th>
                             <th>
                                 <span class="float-end"
@@ -122,7 +119,6 @@
                             </th>
                         </tr>
                         <tr class="text-end">
-                            <th></th>
                             <th>Total Net</th>
                             <th>
                                 <span class="float-end"
@@ -131,7 +127,6 @@
                             </th>
                         </tr>
                         <tr class="text-end">
-                            <th></th>
                             <th>Bayar</th>
                             <th>
                                 <span class="float-end"
@@ -140,7 +135,6 @@
                             </th>
                         </tr>
 						<tr class="text-end">
-                            <th></th>
                             <th>Sisa Kurang</th>
                             <th>
                                 <span class="float-end"
@@ -150,7 +144,6 @@
                         </tr>
 					@else( $data->status_lunas == "1" )
 						<tr class="text-end">
-                            <th style="padding-top: 10px"></th>
                             <th style="padding-top: 10px">Total</th>
                             <th style="padding-top: 10px">
                                 <span class="float-end"
@@ -158,7 +151,6 @@
                             </th>
                         </tr>
                         <tr class="text-end">
-                            <th></th>
                             <th>Pembulatan</th>
                             <th>
                                 <span class="float-end"
@@ -167,7 +159,6 @@
                             </th>
                         </tr>
                         <tr class="text-end">
-                            <th></th>
                             <th>Discount</th>
                             <th>
                                 <span class="float-end"
@@ -176,7 +167,6 @@
                             </th>
                         </tr>
                         <tr class="text-end">
-                            <th></th>
                             <th>Total Net</th>
                             <th>
                                 <span class="float-end"
@@ -185,7 +175,6 @@
                             </th>
                         </tr>
                         <tr class="text-end">
-                            <th></th>
                             <th>Bayar</th>
                             <th>
                                 <span class="float-end"
@@ -194,7 +183,6 @@
                             </th>
                         </tr>
 						<tr class="text-end">
-                            <th></th>
                             <th>Sisa Kurang</th>
                             <th>
                                 <span class="float-end"

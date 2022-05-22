@@ -34,6 +34,54 @@
             </div>
         </div>
 
+		<div class="tw-grid tw-gap-x-2 tw-grid-cols-1 md:tw-grid-cols-3 tw-text-black tw-text-xs md:tw-text-sm">
+            <div class="card tw-rounded-lg tw-mb-[7px]">
+                <div class="card-body px-3 py-1 lg:tw-p-3">
+                    <p>Pengeluaran</p>
+                    <h6 class="tw-text-base tw-font-bold">Rp{{ number_format($pengeluaranHariIni) }}</h6>
+                    <p class="tw-text-gray-500">pada hari ini</p>
+                </div>
+            </div>
+            <div class="card tw-rounded-lg tw-mb-[7px]">
+                <div class="card-body px-3 py-1 lg:tw-p-3">
+                    <p>Pengeluaran</p>
+                    <h6 class="tw-text-base tw-font-bold">Rp{{ number_format($pengeluaranMingguIni) }}</h6>
+                    <p class="tw-text-gray-500">pada minggu ini</p>
+                </div>
+            </div>
+            <div class="card tw-rounded-lg tw-mb-[7px]">
+                <div class="card-body px-3 py-1 lg:tw-p-3">
+                    <p>Pengeluaran</p>
+                    <h6 class="tw-text-base tw-font-bold">Rp{{ number_format($pengeluaranBulanIni) }}</h6>
+                    <p class="tw-text-gray-500">pada bulan ini</p>
+                </div>
+            </div>
+        </div>
+
+		<div class="tw-grid tw-gap-x-2 tw-grid-cols-1 md:tw-grid-cols-3 tw-text-black tw-text-xs md:tw-text-sm">
+            <div class="card tw-rounded-lg tw-mb-[7px]">
+                <div class="card-body px-3 py-1 lg:tw-p-3">
+                    <p>Pendapatan - Pengeluaran</p>
+                    <h6 class="tw-text-base tw-font-bold">Rp{{ number_format($pendapatanHariIni - $pengeluaranHariIni) }}</h6>
+                    <p class="tw-text-gray-500">pada hari ini</p>
+                </div>
+            </div>
+            <div class="card tw-rounded-lg tw-mb-[7px]">
+                <div class="card-body px-3 py-1 lg:tw-p-3">
+                    <p>Pendapatan - Pengeluaran</p>
+                    <h6 class="tw-text-base tw-font-bold">Rp{{ number_format($pendapatanMingguIni - $pengeluaranMingguIni) }}</h6>
+                    <p class="tw-text-gray-500">pada minggu ini</p>
+                </div>
+            </div>
+            <div class="card tw-rounded-lg tw-mb-[7px]">
+                <div class="card-body px-3 py-1 lg:tw-p-3">
+                    <p>Pendapatan - Pengeluaran</p>
+                    <h6 class="tw-text-base tw-font-bold">Rp{{ number_format($pendapatanBulanIni - $pengeluaranBulanIni) }}</h6>
+                    <p class="tw-text-gray-500">pada bulan ini</p>
+                </div>
+            </div>
+        </div>
+
         <div class="tw-mt-[-10px] mb-3">
             <h6 class="section-title tw-text-sm">Ringkasan</h6>
             <p class="section-lead tw-hidden tw-text-xs lg:tw-block">Ringkasan transaksi pada hari ini, minggu ini, dan
@@ -159,7 +207,7 @@
                             <input type="date" wire:model='sampaiTanggal' id="sampaiTanggal" class="form-control">
                         </div>
                         <div class="form-group">
-                              <label for="status">Status Order</label>
+                              <label for="status">Status Order {{ $idStatus }}</label>
                               <select wire:model='idStatus' id="status" class="form-control">
                                 <option value="0">All</option>
                                 <option value="1">Sedang Produksi (1)</option>
@@ -167,6 +215,17 @@
                                 <option value="3">Selesai Belum Di-Ambil (3)</option>
                                 <option value="4">Selesai Sudah Di-Ambil (4)</option>
                               </select>
+                        </div>
+						<div class="form-group">
+                              <label for="idCustomer">Customer {{ $idCustomer }}</label>
+							  <div wire:ignore>
+								<select wire:model='idCustomer' id="idCustomer" class="form-control">
+									<option selected value="0">-- Selected Option --</option>
+									@foreach($customer as $cust)
+										<option value="{{ $cust->id }}">{{ $cust->nama_customer }} - {{ $cust->no_telepon }}</option>
+									@endforeach
+								</select>
+							</div>
                         </div>
                     </div>
                 </div>
@@ -294,3 +353,14 @@
         </div>
     </div>
 </div>
+@push('scripts')
+<script>
+	$(document).ready(function () {
+        $('#idCustomer').select2();
+        $('#idCustomer').on('change', function (e) {
+            var data = $('#idCustomer').select2("val");
+            @this.set('idCustomer', data);
+        });
+    });
+</script>
+@endpush

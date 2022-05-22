@@ -50,12 +50,7 @@ class PembayaranController extends Controller
                 'pembayaran'        =>  '0',
                 'status_lunas'      =>  '0',
             ]);
-            if( Auth::user()->hasRole('admin') )
-			{
-				return redirect()->route('cetak-invoice', $request->id_order_kerja);
-			} else {
-				return redirect()->route('data-transaksi');
-			}
+            return redirect()->route('cetak-invoice', $request->id_order_kerja);
 		}else if( $request->sisa_kurang == 0 ){
             $data = Pembayaran::create([
                 'id_user'           =>  Auth::user()->id,
@@ -71,12 +66,7 @@ class PembayaranController extends Controller
                 'pembayaran'        =>  '0',
                 'status_lunas'      =>  '1',
             ]);
-            if( Auth::user()->hasRole('admin') )
-			{
-				return redirect()->route('cetak-invoice', $request->id_order_kerja);
-			} else {
-				return redirect()->route('data-transaksi');
-			}
+            return redirect()->route('cetak-invoice', $request->id_order_kerja);
         } else if ( $request->sisa_kurang > 0 ) {
             $data = Pembayaran::create([
                 'id_user'           =>  Auth::user()->id,
@@ -92,12 +82,7 @@ class PembayaranController extends Controller
                 'pembayaran'        =>  '0',
                 'status_lunas'      =>  '0',
             ]);
-			if( Auth::user()->hasRole('admin') )
-			{
-				return redirect()->route('cetak-invoice', $request->id_order_kerja);
-			} else {
-				return redirect()->route('data-transaksi');
-			}
+			return redirect()->route('cetak-invoice', $request->id_order_kerja);
         } else if ( $request->sisa_kurang < 0 ) {
 			if( Auth::user()->hasRole('admin') )
 			{

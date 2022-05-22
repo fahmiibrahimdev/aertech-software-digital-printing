@@ -171,6 +171,7 @@
                                     class="far fa-hand-holding-usd"></i><span>Keuangan</span></a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a href="{{ url('admin/pembayaran-belum-lunas') }}" class="nav-link">Pembayaran Belum Lunas</a></li>
+								<li class="nav-item"><a href="{{ url('admin/pengeluaran') }}" class="nav-link">Pengeluaran</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -227,6 +228,7 @@
                                     class="far fa-hand-holding-usd"></i><span>Keuangan</span></a>
                             <ul class="dropdown-menu">
                                 <li class="nav-item"><a href="{{ url('pembayaran-belum-lunas') }}" class="nav-link">Pembayaran Belum Lunas</a></li>
+								<li class="nav-item"><a href="{{ url('pengeluaran') }}" class="nav-link">Pengeluaran</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

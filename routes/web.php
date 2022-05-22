@@ -26,6 +26,8 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Livewire\CetakStruk\CetakStruk;
 use App\Http\Livewire\DataUser\DataUser;
 use App\Http\Livewire\PembayaranBelumLunas\PembayaranBelumLunas;
+use App\Http\Livewire\Pengeluaran\Pengeluaran;
+use App\Http\Livewire\PengeluaranPengeluaran;
 use App\Http\Livewire\TrackingOrder\TrackingOrder;
 
 /*
@@ -87,6 +89,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::get('admin/daftar-user', DataUser::class)->name('daftar-user');
     Route::get('admin/pembayaran-belum-lunas', PembayaranBelumLunas::class)->name('pembayaran-belum-lunas');
     Route::get('admin/cetak-struk', CetakStruk::class)->name('cetak-struk');
+    Route::get('admin/pengeluaran', Pengeluaran::class)->name('admin/pengeluaran');
 });
 
 Route::group(['middleware' => ['auth', 'role:desainer']], function() {
@@ -106,6 +109,7 @@ Route::group(['middleware' => ['auth', 'role:desainer']], function() {
     Route::get('kategori', Kategori::class)->name('kategori');
     Route::get('daftar-stock', DaftarStock::class)->name('daftar-stock');
     Route::get('cetak-struk', CetakStruk::class)->name('cetak-struk');
+	Route::get('pengeluaran', Pengeluaran::class)->name('pengeluaran');
 });
 
 Route::group(['middleware' => ['auth', 'role:produksi']], function() {
