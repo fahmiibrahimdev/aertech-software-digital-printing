@@ -28,6 +28,9 @@ use App\Http\Livewire\DataUser\DataUser;
 use App\Http\Livewire\PembayaranBelumLunas\PembayaranBelumLunas;
 use App\Http\Livewire\Pengeluaran\Pengeluaran;
 use App\Http\Livewire\PengeluaranPengeluaran;
+use App\Http\Livewire\RekapData\PrintDataOrder;
+use App\Http\Livewire\RekapData\PrintPendapatanPengeluaran;
+use App\Http\Livewire\RekapData\RekapData;
 use App\Http\Livewire\TrackingOrder\TrackingOrder;
 
 /*
@@ -58,6 +61,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('get-data-id-bahan-dan-pekerjaan/{id}', 'App\Http\Controllers\AllController@getDataIdBahanDanPekerjaan')->name('get-data-id-bahan-dan-pekerjaan');
     Route::get('get-data-pekerjaan-dan-id-mesin/{id_pekerjaan}', 'App\Http\Controllers\AllController@getDataPekerjaanDanIdMesin')->name('get-data-pekerjaan-dan-id-mesin');
     Route::get('cetak-invoice/{id}', 'App\Http\Controllers\AllController@cetakInvoice')->name('cetak-invoice');
+    Route::get('print-data-order/{id_customer}/{start_date}/{end_date}', PrintDataOrder::class)->name('print-data-order');
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
@@ -89,7 +93,9 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::get('admin/daftar-user', DataUser::class)->name('daftar-user');
     Route::get('admin/pembayaran-belum-lunas', PembayaranBelumLunas::class)->name('pembayaran-belum-lunas');
     Route::get('admin/cetak-struk', CetakStruk::class)->name('cetak-struk');
-    Route::get('admin/pengeluaran', Pengeluaran::class)->name('admin/pengeluaran');
+	Route::get('admin/pengeluaran', Pengeluaran::class)->name('admin/pengeluaran');
+    Route::get('admin/rekap-data', RekapData::class)->name('admin/rekap-data');
+    Route::get('admin/print-pendapatan-pengeluaran/{dariTanggal}/{sampaiTanggal}', PrintPendapatanPengeluaran::class)->name('admin/print-pendapatan-pengeluaran');
 });
 
 Route::group(['middleware' => ['auth', 'role:desainer']], function() {
