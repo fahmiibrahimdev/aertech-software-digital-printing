@@ -62,6 +62,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('get-data-pekerjaan-dan-id-mesin/{id_pekerjaan}', 'App\Http\Controllers\AllController@getDataPekerjaanDanIdMesin')->name('get-data-pekerjaan-dan-id-mesin');
     Route::get('cetak-invoice/{id}', 'App\Http\Controllers\AllController@cetakInvoice')->name('cetak-invoice');
     Route::get('print-data-order/{id_customer}/{start_date}/{end_date}', PrintDataOrder::class)->name('print-data-order');
+    Route::get('print-pendapatan-pengeluaran/{dariTanggal}/{sampaiTanggal}', PrintPendapatanPengeluaran::class)->name('print-pendapatan-pengeluaran');
+
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
@@ -95,7 +97,6 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
     Route::get('admin/cetak-struk', CetakStruk::class)->name('cetak-struk');
 	Route::get('admin/pengeluaran', Pengeluaran::class)->name('admin/pengeluaran');
     Route::get('admin/rekap-data', RekapData::class)->name('admin/rekap-data');
-    Route::get('admin/print-pendapatan-pengeluaran/{dariTanggal}/{sampaiTanggal}', PrintPendapatanPengeluaran::class)->name('admin/print-pendapatan-pengeluaran');
 });
 
 Route::group(['middleware' => ['auth', 'role:desainer']], function() {
@@ -116,6 +117,7 @@ Route::group(['middleware' => ['auth', 'role:desainer']], function() {
     Route::get('daftar-stock', DaftarStock::class)->name('daftar-stock');
     Route::get('cetak-struk', CetakStruk::class)->name('cetak-struk');
 	Route::get('pengeluaran', Pengeluaran::class)->name('pengeluaran');
+	Route::get('rekap-data', RekapData::class)->name('rekap-data');
 });
 
 Route::group(['middleware' => ['auth', 'role:produksi']], function() {

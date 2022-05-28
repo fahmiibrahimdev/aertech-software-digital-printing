@@ -29,7 +29,7 @@
 								</div>
 							</div>
 						</div>
-						<a href="{{ route('admin/print-pendapatan-pengeluaran', ['dariTanggal' => $dari_tanggal, 'sampaiTanggal' => $sampai_tanggal]) }}" class="btn btn-outline-primary form-control" target="_BLANK"><i class="fas fa-print"></i> Print PDF</a>
+						<a href="{{ route('print-pendapatan-pengeluaran', ['dariTanggal' => $dari_tanggal, 'sampaiTanggal' => $sampai_tanggal]) }}" class="btn btn-outline-primary form-control" target="_BLANK"><i class="fas fa-print"></i> Print PDF</a>
                     </div>
                 </div>
             </div>
